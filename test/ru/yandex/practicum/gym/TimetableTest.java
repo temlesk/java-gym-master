@@ -1,6 +1,5 @@
 package ru.yandex.practicum.gym;
 
-import org.jspecify.annotations.NonNull;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -34,7 +33,7 @@ public class TimetableTest {
 
     @Test
     void testGetTrainingSessionsForDayMultipleSessions() {
-        Timetable timetable = getTimetable();
+        Timetable timetable = new Timetable();
 
         // Проверить, что за понедельник вернулось одно занятие
         Map<TimeOfDay, List<TrainingSession>> trainingsMonday = timetable.getTrainingSessionsForDay(DayOfWeek.MONDAY);
@@ -55,31 +54,6 @@ public class TimetableTest {
         // Проверить, что за вторник не вернулось занятий
         Map<TimeOfDay, List<TrainingSession>> trainingsTuesday = timetable.getTrainingSessionsForDay(DayOfWeek.TUESDAY);
         assertEquals(0, trainingsTuesday.size());
-    }
-
-    private static @NonNull Timetable getTimetable() {
-        Timetable timetable = new Timetable();
-
-        Coach coach = new Coach("Васильев", "Николай", "Сергеевич");
-
-        Group groupAdult = new Group("Акробатика для взрослых", Age.ADULT, 90);
-        TrainingSession thursdayAdultTrainingSession = new TrainingSession(groupAdult, coach,
-                DayOfWeek.THURSDAY, new TimeOfDay(20, 0));
-
-        timetable.addNewTrainingSession(thursdayAdultTrainingSession);
-
-        Group groupChild = new Group("Акробатика для детей", Age.CHILD, 60);
-        TrainingSession mondayChildTrainingSession = new TrainingSession(groupChild, coach,
-                DayOfWeek.MONDAY, new TimeOfDay(13, 0));
-        TrainingSession thursdayChildTrainingSession = new TrainingSession(groupChild, coach,
-                DayOfWeek.THURSDAY, new TimeOfDay(13, 0));
-        TrainingSession saturdayChildTrainingSession = new TrainingSession(groupChild, coach,
-                DayOfWeek.SATURDAY, new TimeOfDay(10, 0));
-
-        timetable.addNewTrainingSession(mondayChildTrainingSession);
-        timetable.addNewTrainingSession(thursdayChildTrainingSession);
-        timetable.addNewTrainingSession(saturdayChildTrainingSession);
-        return timetable;
     }
 
     @Test
