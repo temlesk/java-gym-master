@@ -43,16 +43,16 @@ public class Timetable {
 
     public List<CounterOfTrainings> getCountByCoaches() {
         Map<Coach, Integer> countByCoaches = new HashMap<>();
-        for (Map<TimeOfDay, List<TrainingSession>> daySchedule : timetable.values()){
-            for(List<TrainingSession> sessions : daySchedule.values()){
-                for(TrainingSession session : sessions){
+        for(Map<TimeOfDay, List<TrainingSession>> daySchedule : timetable.values()) {
+            for(List<TrainingSession> sessions : daySchedule.values()) {
+                for(TrainingSession session : sessions) {
                     Coach coach = session.getCoach();
                     countByCoaches.put(coach, countByCoaches.getOrDefault(coach, 0) + 1);
                 }
             }
         }
         List<CounterOfTrainings> result = new ArrayList<>();
-        for (Map.Entry<Coach, Integer> entry : countByCoaches.entrySet()) {
+        for(Map.Entry<Coach, Integer> entry : countByCoaches.entrySet()) {
             result.add(new CounterOfTrainings(entry.getKey(), entry.getValue()));
         }
 
