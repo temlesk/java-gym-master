@@ -37,8 +37,8 @@ public class Timetable {
         if (Objects.isNull(dayTrainings)) {
             return new ArrayList<>();
         }
-        List<TrainingSession> timeTrainings = dayTrainings.get(timeOfDay);
-        return Objects.nonNull(timeTrainings) ? timeTrainings : new ArrayList<>();
+        return dayTrainings.getOrDefault(timeOfDay, new ArrayList<>());
+
     }
 
     public List<CounterOfTrainings> getCountByCoaches() {

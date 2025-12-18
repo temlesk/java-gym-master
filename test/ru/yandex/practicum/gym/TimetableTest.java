@@ -126,8 +126,6 @@ public class TimetableTest {
         List<TrainingSession> result = timetable.getTrainingSessionsForDayAndTime(DayOfWeek.MONDAY, new TimeOfDay(12, 0));
 
         assertEquals(1, result.size());
-//        assertEquals(result.contains(singleTrainingSession1));
-//        assertEquals(result.contains(singleTrainingSession2));
     }
 
 
@@ -144,7 +142,10 @@ public class TimetableTest {
         timetable.addNewTrainingSession(new TrainingSession(groupА, coachА, DayOfWeek.SATURDAY, new TimeOfDay(18, 0)));
 
         List<CounterOfTrainings> result = timetable.getCountByCoaches();
+
         assertEquals(1, result.size());
+        CounterOfTrainings coachCounter = result.get(0);
+        assertEquals(3, coachCounter.getCount());
     }
 
     @Test
@@ -159,9 +160,18 @@ public class TimetableTest {
         timetable.addNewTrainingSession(new TrainingSession(groupB, coachB, DayOfWeek.MONDAY, new TimeOfDay(10, 0)));
         timetable.addNewTrainingSession(new TrainingSession(groupA, coachA, DayOfWeek.SATURDAY, new TimeOfDay(9, 0)));
         timetable.addNewTrainingSession(new TrainingSession(groupB, coachB, DayOfWeek.FRIDAY, new TimeOfDay(20, 0)));
+        timetable.addNewTrainingSession(new TrainingSession(groupA, coachA, DayOfWeek.WEDNESDAY, new TimeOfDay(18, 0)));
+        timetable.addNewTrainingSession(new TrainingSession(groupB, coachB, DayOfWeek.WEDNESDAY, new TimeOfDay(18, 0)));
+        timetable.addNewTrainingSession(new TrainingSession(groupA, coachA, DayOfWeek.WEDNESDAY, new TimeOfDay(18, 0)));
+        timetable.addNewTrainingSession(new TrainingSession(groupB, coachB, DayOfWeek.WEDNESDAY, new TimeOfDay(18, 0)));
 
         List<CounterOfTrainings> result = timetable.getCountByCoaches();
+
         assertEquals(2, result.size());
+        CounterOfTrainings coachCounter = result.get(0);
+        assertEquals(4, coachCounter.getCount());
+        CounterOfTrainings coachSecondCounter = result.get(1);
+        assertEquals(4, coachSecondCounter.getCount());
     }
 
     @Test
